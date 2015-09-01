@@ -81,10 +81,17 @@ Note: Please take the 'quantity' column into account!
 Optional: Learn how to use 'defaultdict' to simplify your code.
 '''
 
+chip_orders = []
+number_orders_chips = []
+count = []
+new_item = []
+chips_dict = {}
 for chips in data:
 	if("Chips" in chips[2]):
-		#print chips[2]
-		chips_dict = dict(zip(chips[2],chips[1]))
-		print chips_dict
+		chip_orders.append(chips[2])
+		number_orders_chips.append(int(chips[1]))
+
+chips_dict = dict(zip(chip_orders,number_orders_chips))
+print(chips_dict)
 
 #BONUS: Think of a question about this data that interests you, and then answer it!
