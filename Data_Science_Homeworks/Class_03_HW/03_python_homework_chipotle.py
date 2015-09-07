@@ -81,17 +81,15 @@ Note: Please take the 'quantity' column into account!
 Optional: Learn how to use 'defaultdict' to simplify your code.
 '''
 
-chip_orders = []
-number_orders_chips = []
-count = []
-new_item = []
-chips_dict = {}
-for chips in data:
-	if("Chips" in chips[2]):
-		chip_orders.append(chips[2])
-		number_orders_chips.append(int(chips[1]))
+chips = {}
 
-chips_dict = dict(zip(chip_orders,number_orders_chips))
-print(chips_dict)
-
+# if chip order is not in dictionary, then add a new key/value pair
+# if chip order is already in dictionary, then update the value for that key
+for row in data:
+    if 'Chips' in row[2]:
+        if row[2] not in chips:
+            chips[row[2]] = int(row[1])     # this is a new key, so create key/value pair
+        else:
+            chips[row[2]] += int(row[1])    # this is an existing key, so add to the value
+print(chips)
 #BONUS: Think of a question about this data that interests you, and then answer it!
