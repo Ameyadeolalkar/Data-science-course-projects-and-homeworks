@@ -62,9 +62,10 @@ movies.groupby('content_rating').duration.mean().plot(kind='bar')
 # determine the top rated movie (by star rating) for each genre
 movies.groupby(['title','genre']).star_rating.agg('max')
 # check if there are multiple movies with the same title, and if so, determine if they are actually duplicates
-movies[movies.title.duplicated()] #Not really duplicates
+dupe_titles = movies[movies.title.duplicated()].title
+movies[movies.title.isin(dupe_titles)]
 # calculate the average star rating for each genre, but only include genres with at least 10 movies
-movies.groupby(['genre','title']).star_rating.agg('mean')
+movies.groupby('genre').star_rating.agg('mean')[movies.genre.value_counts()>=10]
 '''
 BONUS
 '''
