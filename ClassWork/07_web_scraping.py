@@ -105,7 +105,8 @@ sys.setdefaultencoding('utf8')
 # get the title
 b.find(name='span',attrs={'class':'itemprop','itemprop':'name'}).text
 # get the star rating
-b.find(name='div',attrs={'class':'titlePageSprite star-box-giga-star'}).text
+star = b.find(name='div',attrs={'class':'titlePageSprite star-box-giga-star'}).text.strip()
+float(star)
 '''
 EXERCISE TWO
 '''
@@ -113,7 +114,7 @@ EXERCISE TWO
 # get the description
 b.find(name='p',attrs={'itemprop':'description'}).text
 # get the content rating
-b.find(name='meta',attrs={'itemprop':'contentRating'})['content']
+content_rating = b.find(name='meta',attrs={'itemprop':'contentRating'})['content']
 
 # get the duration in minutes (as an integer)
 info = b.find(name='time',attrs={'itemprop':'duration'}).text.strip()[:-4]
@@ -140,6 +141,26 @@ a list in which each element is a dictionary of movie information.
 
 Finally, convert that list into a DataFrame.
 '''
+def get_movie_info(id):
+    d={}
+    r=requests.get('http://www.imdb.com/title/'+id+'/')
+    b = BeautifulSoup(r.text)    
+    d['content_rating'] = b.find(name='meta',attrs={'itemprop':'contentRating'})['content']
+    d['description'] = b.find(name='p',attrs={'itemprop':'description'}).text
+    info = b.find(name='time',attrs={'itemprop':'duration'}).text.strip()[:-4]
+    d['duration'] = int(info)
+    star = b.find(name='div',attrs={'class':'titlePageSprite star-box-giga-star'}).text.strip()
+    d['star_rating'] = float(star)
+    d['title'] = b.find(name='span',attrs={'class':'itemprop','itemprop':'name'}).text
+    print d
+    
+get_movie_info('tt0111161')   
+
+with open('imdb_ids.txt','rU') as f:
+    title_list = f.read()
+print title_list
+
+
 
 
 
