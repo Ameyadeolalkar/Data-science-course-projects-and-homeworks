@@ -1,0 +1,29 @@
+In the Party Registration example, what are the features? What is the response? Is this a regression or classification problem?
+A: Features - voter party registration, voter wealth, quantitative measure of voter religiousness. Response - shows republican and democratic voters based on wealth and religiousness features, this is a classification problem
+
+Conceptually, how is KNN being applied to this problem to make a prediction?
+A: All new data is correlated with the training data predict value based on predictions of specified number of neighbors. eg. if neighbors of new data are democrats, new data will be predicted as democrat
+
+How do the four visualizations in section 3 relate to one another? Change the value of K using the slider, and make sure you understand what changed in the visualizations (and why it changed).
+A: First plot shows nearest neighbors for the training data, second plot shows predicted values of new data based on k=1 neighbors, third plot shows predicted values of new data based on different values of k. As the slider in the third plot moves to the right, the value of k,  i.e number of nearest neighbors increases 
+
+In figures 4 and 5, what do the lighter colors versus the darker colors mean? How is the darkness calculated?
+A: Lighter colors mean less certainity in predictions. Darkness is calculated based on certainity of prediction which increases as the number of neighbors or training data set elements increases
+
+What does the black line in figure 5 represent? What predictions would the best possible machine learning model make, with respect to this line?
+A: The line provides a clear disctinction between the two classification entities. A good machine learning model will have no predictions near the line. all predictions will be of low bias and low variance
+
+Choose a very small value of K, and click the button "Generate New Training Data" a number of times. Do you "see" low variance or high variance, and low bias or high bias?
+A: High variance and low bias
+
+Repeat this with a very large value of K. Do you "see" low variance or high variance, and low bias or high bias?
+A: Low variance and High bias
+
+Try using other values of K. What value of K do you think is "best"? How do you define "best"?
+A: 20. best is low bias and high variance
+
+Does a small value for K cause "overfitting" or "underfitting"?
+A: Underfitting
+
+Why should we care about variance at all? Shouldn't we just minimize bias and ignore variance?
+A: It is true that a high variance and low bias model can preform well in some sort of long-run average sense. However, in practice modelers are always dealing with a single realization of the data set. In these cases, long run averages are irrelevant, what is important is the performance of the model on the data you actually have and in this case bias and variance are equally important and one should not be improved at an excessive expense to the other.

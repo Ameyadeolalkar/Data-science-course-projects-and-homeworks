@@ -23,7 +23,7 @@ Finally, convert that list into a DataFrame.
 
 from bs4 import BeautifulSoup
 import requests
-
+import pandas as pd
 def get_movie_info(id):
     d={}
     r=requests.get('http://www.imdb.com/title/'+id+'/')   
@@ -38,12 +38,13 @@ def get_movie_info(id):
     print d
     
 get_movie_info('tt0111161') 
-
 titles = []
+info = []
 with open('imdb_ids.txt') as f:
     for line in f:
         titles.append(line.strip())
 print titles
 
 for id in titles:
-    get_movie_info(id)
+    pd.DataFrame(get_movie_info(id))
+    
